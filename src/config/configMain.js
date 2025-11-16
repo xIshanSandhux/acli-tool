@@ -6,10 +6,7 @@ import fsPromises from 'node:fs/promises';
 export async function createConfigDir() {
 
     try{
-        if (!fs.existsSync(configDirPath())) {
-            await fsPromises.mkdir(configDirPath());
-        }else{
-        }
+        await fsPromises.mkdir(configDirPath());
     } catch (error) {
         console.error(`Error creating config directory: ${error}`)
     }
@@ -18,12 +15,8 @@ export async function createConfigDir() {
 // creates the config file if it doesn't exist
 export async function createConfigFile() {
     try{
-        if (!fs.existsSync(configFilePath())) {
            await fsPromises.writeFile(configFilePath(), JSON.stringify({}, null, 2)) 
-        }else {
-            console.debug('Config file already exists');
-        }
-    }catch (error) {
+        }catch (error) {
         console.error(`Error creating config file: ${error}`);
     }
 }
@@ -34,5 +27,30 @@ export async function updateConfigFile(config) {
         await fsPromises.writeFile(configFilePath(), JSON.stringify(config, null, 2))
     }catch (error) {
         console.error(`Error updating config file: ${error}`);
+    }
+}
+
+export function checkConfigDirExists() {
+    if (!fs.existsSync(configDirPath())) {
+        return false;
+    }else {
+        return true;
+    }
+}
+
+export function checkConfigFileExists() {
+    if (!fs.existsSync(configFilePath())) {
+        return false;
+    }else {
+        return true;
+    }
+}
+
+export async function readConfigFile(){
+    try{
+        const data = await fsPromises.readFile(configFilePath(), 'utf8');
+        return JSON.parse(data);
+    }catch (error) {
+        console.error(`Error reading config file: ${error}`);
     }
 }
