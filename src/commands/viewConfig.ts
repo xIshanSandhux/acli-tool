@@ -1,9 +1,10 @@
 // viewConfig command
 // This command will show the user the current config
 import { Command } from 'commander';
-import { readConfigFile, checkConfigFileExists } from '../config/configMain.js';
-import { askingUserQuestions } from '../../dist/src/config/questions.js';
+import { readConfigFile, checkConfigFileExists, updateConfigFile } from '../config/configMain.js';
+import { updateConfigQuestions } from '../config/questions.js';
 import chalk from 'chalk';
+import inquirer from 'inquirer';
 
 export default function ConfigCommand(program: Command) {
     program.command('config')
@@ -14,7 +15,7 @@ export default function ConfigCommand(program: Command) {
         if(checkConfigFileExists()){
             currentConfig = await readConfigFile();
         }else{
-            return console.error(chalk.red('No config file found. Please run `ai init` to create one.'));
+            throw new Error(chalk.red('No config file found. Please run `ai init` to create one.'));
         }
         if('view' in options ){
             const heading : string = '⚙️ Current Config';
@@ -26,5 +27,14 @@ export default function ConfigCommand(program: Command) {
             })
             console.log(chalk.dim("────────────────────────"));
         }
+        if('update' in options ){
+            console.log("🔧 Config Update");
+            console.log(chalk.dim("───────────────────────"));
+            const questions = await updateConfigQuestions();
+            const answers = await inquirer.prompt(questions)
+            await updateConfigFile(answers);
+            console.log(chalk.dim("───────────────────────"));
+        }
+
     })
 }

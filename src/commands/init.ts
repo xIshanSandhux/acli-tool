@@ -5,8 +5,10 @@
 // ask user for the API key, provider, model, and cache settings and save it to the config.json file
 import { createConfigDir, createConfigFile, updateConfigFile, checkConfigDirExists, checkConfigFileExists } from '../config/configMain.js';
 import inquirer from 'inquirer';
-import { askingUserQuestions} from '../../dist/src/config/questions.js';
-export default function initCommand(program) {
+import { askingUserQuestions } from '../config/questions.js';
+import { Command } from 'commander';
+
+export default function initCommand(program: Command) {
     program.command('init')
     .description('Initialize the CLI tool')
     .action(async () => {

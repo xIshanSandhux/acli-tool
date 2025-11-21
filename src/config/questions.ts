@@ -1,7 +1,19 @@
 import inquirer from 'inquirer';
 import { updateConfigFile } from './configMain.js';
+import { readConfigFile } from './configMain.js';
+import { checkConfigFileExists } from './configMain.js';
+import chalk from 'chalk';
+
+
+interface Questions {
+    type: string;
+    name: string;
+    message: string;
+    choices?: string[];
+    default?: string |boolean;
+}
 // questions for the user to answer
-export function initQuestions() {
+export function initQuestions() :Questions[] {
     return [
         {
             type: 'input',
@@ -37,4 +49,21 @@ export async function askingUserQuestions() : Promise<void>{
     }).catch((error) =>{
         console.error(`Error initializing the CLI tool getting user input: ${error}`);
     })
+}
+
+export async function updateConfigQuestions()  {
+    if(!checkConfigFileExists()){
+        throw new Error(chalk.red('No config file found. Please run `ai init` to create one.'));
+    }
+    const currentConfig = await readConfigFile();
+    const questions = [];
+    for (const key in currentConfig) {
+        questions.push({
+            'type': currentConfig[key] === 'cache'? 'confirm' : 'input',
+            'name': key,
+            'message': `Please Enter your updated ${key}, the default will be displayed in the format (current value): `,
+            'default': currentConfig[key]
+        })
+    }
+    return questions;
 }
