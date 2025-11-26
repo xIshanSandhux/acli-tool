@@ -3,7 +3,7 @@ import { readConfigFile } from '../config/configMain.js';
 import {Messages} from './MessageInterface.js';
 import fs from 'node:fs';
 
-export async function chat(filePath: string): Promise<string>{
+export async function chat(filePath: string, messages: Messages[]): Promise<string>{
   console.log(`File path: ${filePath}`);
   // let systemPrompt: string = '';
   // try{
@@ -18,10 +18,6 @@ export async function chat(filePath: string): Promise<string>{
   const modelName: string = config.model;
   console.log(ApiKey);
   console.log(modelName);
-  const messages: Messages[] = [
-    {role: 'system', content: 'You are a helpful assistant.'},
-    {role: 'user', content: 'What is the meaning of life?'}
-  ]
 
   const openRouter = new OpenRouter({apiKey: ApiKey});
 
