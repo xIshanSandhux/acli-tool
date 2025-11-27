@@ -4,7 +4,6 @@ import { Command } from "commander";
 import fs from 'node:fs';
 import path from 'node:path';
 
-
 export default function explainCommand(program: Command){
 
     program.command('explain')
@@ -30,12 +29,8 @@ export default function explainCommand(program: Command){
             {'role': 'system', 'content': systemPrompt},
             {'role':'user', 'content': `Explain the code: ${fileContent}`}
         ]
-        console.log(messages);
-        console.log(options);
         if('file' in options){
             const response = await chat(options.file, messages);
-            // console.log(marked.parse(response));
-            // console.log(md.render(response));
             console.log(response);
         }else{
             console.error('No file path provided');
