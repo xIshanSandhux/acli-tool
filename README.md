@@ -100,7 +100,7 @@ You can update your configuration at any time using `acli config --update`.
 
 ## License
 
-ISC
+MIT
 
 ## Issues & Support
 
