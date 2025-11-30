@@ -2,10 +2,11 @@
 
 An AI-powered coding assistant for explaining, reviewing, and improving your code — right from the terminal.
 
+
 ## Installation
 
 ```bash
-npm install -g cli-tool
+npm install -g acli
 ```
 
 ## Quick Start
