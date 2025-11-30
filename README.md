@@ -21,7 +21,6 @@ This will prompt you to enter:
 - **API Key**: Your OpenRouter API key
 - **Provider**: AI provider (currently supports `openrouter`)
 - **Model**: Model name (default: `x-ai/grok-4.1-fast`)
-- **Cache**: Enable/disable caching (default: `false`)
 
 ## Commands
 
