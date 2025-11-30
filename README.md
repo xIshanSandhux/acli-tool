@@ -89,18 +89,17 @@ Configuration is stored in your home directory under a `config` folder. The conf
 - `apiKey`: Your OpenRouter API key
 - `provider`: AI provider (currently only `openrouter` is applicable)
 - `model`: Model name to use for AI requests
-- `cache`: Whether to enable caching
 
 You can update your configuration at any time using `acli config --update`.
 
 ## Requirements
 
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - OpenRouter API key ([Get one here](https://openrouter.ai/))
 "" only is applicable
 ## License
 
-ISC
+MIT
 
 ## Issues & Support
 
