@@ -40,6 +40,9 @@ export function initQuestions() :Questions[] {
 export async function askingUserQuestions() : Promise<void>{
     await inquirer.prompt(initQuestions()).then(async(userInput) =>{
         await updateConfigFile(userInput);
+        
+        console.log(chalk.dim("───────────────────────"));
+        console.log(chalk.bold("⚙️ Config created/updated successfully !"))
     }).catch((error) =>{
         console.error(`Error initializing the CLI tool getting user input: ${error}`);
     })
@@ -47,7 +50,7 @@ export async function askingUserQuestions() : Promise<void>{
 
 export async function updateConfigQuestions()  {
     if(!checkConfigFileExists()){
-        throw new Error(chalk.red('No config file found. Please run `ai init` to create one.'));
+        throw new Error(chalk.red('No config file found. Please run `acli init` to create one.'));
     }
     const currentConfig = await readConfigFile();
     const questions = [];

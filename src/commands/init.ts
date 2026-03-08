@@ -7,6 +7,7 @@ import { createConfigDir, createConfigFile, updateConfigFile, checkConfigDirExis
 import inquirer from 'inquirer';
 import { askingUserQuestions } from '../config/questions.js';
 import { Command } from 'commander';
+import chalk from 'chalk';
 
 export default function initCommand(program: Command) {
     program.command('init')
@@ -31,6 +32,8 @@ export default function initCommand(program: Command) {
                 .then(async(updateRequest) => {
                     if(updateRequest.updateConfirmation){
                         await askingUserQuestions();
+                    }else{
+                        console.log(chalk.bold("⚙️ Config not updated !"))
                     }
                 }).catch((error) => {
                     console.error(`Error initializing the CLI tool getting user input: ${error}`);

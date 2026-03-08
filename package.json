@@ -1,6 +1,6 @@
 {
   "name": "acli-tool",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "An AI-powered coding assistant for explaining, reviewing, and improving your code — right from the terminal.",
   "main": "./dist/index.js",
   "scripts": {
